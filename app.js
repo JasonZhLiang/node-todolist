@@ -4,15 +4,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://jasonbitheads:xxx@cluster0.zg7lpaa.mongodb.net/todolist?retryWrites=true&w=majority", { useNewUrlParser: true });
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PSW}@cluster0.zg7lpaa.mongodb.net/todolist?retryWrites=true&w=majority`, { useNewUrlParser: true });
 
 const itemsSchema = {
   name: String
